@@ -24,8 +24,10 @@ var tourneylist = [];
 bot.addListener("message", function (from, to, message) {
     "use strict";
     if (message.indexOf('join tourney') > -1 || message.indexOf('Join tourney') > -1 || message.indexOf('Join Tourney') > -1 || message.indexOf('Join tournament') > -1 || message.indexOf('Join Tournament') > -1) {
-        tourneylist[tourneylist.length] = message.from;
+        if (tourneylist.indexOf(from) > -1) {
+            bot.say(from, "You've already signed up silly!"); } else {tourneylist[tourneylist.length] = message.from;
         bot.say(from, "Thanks for signing up!");
+        }
     }
 });
 
@@ -42,4 +44,6 @@ bot.addListener('pm', function (nick, message) {
     }
 });
 
-//todo list: prevent people from entering tournament multiple times, validation process (valid deck, etc; prob in another file), swiss match assignment function (yay more shitty computer rng), blacklist for people who are not allowed to play in tournaments for w.e reason
+//bot.addListener(
+
+//todo list:validation process (valid deck, etc; prob in another file), swiss match assignment function (yay more shitty computer rng), blacklist for people who are not allowed to play in tournaments for w.e reason
