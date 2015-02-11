@@ -15,17 +15,20 @@ var bot = new irc.Client(config.server, config.botName, {
 
 //actual tournament sign-up process
 console.log("Who's ready to duel!");
-//gonna need an array to save the info, maybe make name shorter?
 
 var tourneylist = [];
-
-//user commands to join it, lots of choices = catering to lax spelling/grammar users
+var blacklist = []; //add bad people to this list
+//bot.addListener("pm", function (nick, message) {
+//    "use strict";
+//   if (nick === "OmniMage" && message === "unsure what to put here atm") }
+//user commands to join it, lots of choices = catering to lax spelling/grammar users; checks for legality and previous sign-ups.
 
 bot.addListener("message", function (from, to, message) {
     "use strict";
     if (message.indexOf('join tourney') > -1 || message.indexOf('Join tourney') > -1 || message.indexOf('Join Tourney') > -1 || message.indexOf('Join tournament') > -1 || message.indexOf('Join Tournament') > -1) {
-        if (tourneylist.indexOf(from) > -1) {
-            bot.say(from, "You've already signed up silly!"); } else {tourneylist[tourneylist.length] = message.from;
+        if (blacklist.indexOf(from) > -1) {
+            if (tourneylist.indexOf(from) > -1) {
+                bot.say(from, "You've already signed up silly!"); } else bot.say(from, "What are you trying to pull buddy? You're not allowed to play!"); } else {tourneylist[tourneylist.length] = message.from;
         bot.say(from, "Thanks for signing up!");
         }
     }
@@ -44,6 +47,6 @@ bot.addListener('pm', function (nick, message) {
     }
 });
 
-//bot.addListener(
+//bot.addListener(boot for tournament goes here)
 
-//todo list:validation process (valid deck, etc; prob in another file), swiss match assignment function (yay more shitty computer rng), blacklist for people who are not allowed to play in tournaments for w.e reason
+//to-do list: validation process (valid deck, etc; prob in another file), swiss match assignment function (yay more shitty computer rng), complete blacklist function, listener for tournament boot
