@@ -18,9 +18,10 @@ console.log("Who's ready to duel!");
 
 var tourneylist = [];
 var blacklist = []; //add bad people to this list
-//bot.addListener("pm", function (nick, message) {
-//    "use strict";
-//   if (nick === "OmniMage" && message === "unsure what to put here atm") }
+bot.addListener("pm", function (nick, message) {
+    "use strict";
+   if (nick === "OmniMage" && message === "Add  to blacklist") }
+   blacklist[blacklist.length] = stringslice(4, );
 //user commands to join it, lots of choices = catering to lax spelling/grammar users; checks for legality and previous sign-ups.
 
 bot.addListener("message", function (from, to, message) {
