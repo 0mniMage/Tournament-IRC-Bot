@@ -43,11 +43,41 @@ for (tourneyindex = 0; tourneyindex < tourneylist.length; tourneyindex++) {
 }
 bot.addListener('pm', function (nick, message) {
     'use strict';
-    if (nick === "OmniMage" && message === "dump the list") {
+    if (nick === "OmniMage" && message === "dump the tourneylist") {
         console.log(tourneylist.length, tourneyindex);
     }
 });
+var blacklistindex;
+for (blacklistindex = 0; blacklistindex < blacklist.length; blacklistindex++) {
+    text += blacklist[blacklistindex];
+}
+bot.addListener('pm', function (nick, message) {
+    'use strict';
+    if (nick === "OmniMage" && message === "dump the blacklist") {
+        console.log(blacklist.length, blacklistindex);
+    }
+});
 
-//bot.addListener(boot for tournament goes here)
+//End sign-ups
 
-//to-do list: validation process (valid deck, etc; prob in another file), swiss match assignment function (yay more shitty computer rng), complete blacklist function, listener for tournament boot
+//bot.addListener('pm', function (nick, message) {
+//   'use strict';
+//    if (nick === "OmniMage" && message === "Stop") {
+//        console.log(tourneylist.length, tourneyindex);
+//    }
+//});
+
+//Generate seeds for swiss
+
+//(SeedGen () {
+//  'use strict';
+//var seeds;
+//  var shuffle = require('knuth-shuffle').knuthShuffle
+//    ,tourneylist
+//    ,seeds
+//    ;
+//  seeds = shuffle(tourneylist.slice(0));
+//  console.log(seeds);
+//}());
+
+//to-do list: validation process (valid deck, etc; prob in another file), swiss match assignment function (yay more shitty computer rng), listener for tournament boot, better method of list dumping (Security issues mentioned by Star before he left)
