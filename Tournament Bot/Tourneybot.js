@@ -27,9 +27,13 @@ bot.addListener("pm", function (nick, message) {
 
 bot.addListener("message", function (from, to, message) {
     "use strict";
-    if (message.indexOf('join tourney') > -1 || message.indexOf('Join tourney') > -1 || message.indexOf('Join Tourney') > -1 || message.indexOf('Join tournament') > -1 || message.indexOf('Join Tournament') > -1) {
-        if (blacklist.indexOf(from) > -1) {
-            if (tourneylist.indexOf(from) > -1) {
+    if (message.indexOf('join tourney') > -1 
+        || message.indexOf('Join tourney') > -1 
+        || message.indexOf('Join Tourney') > -1 
+        || message.indexOf('Join tournament') > -1 
+        || message.indexOf('Join Tournament') > -1) {
+        if (blacklist.indexOf() > -1) {
+            if (tourneylist.indexOf() > -1) {
                 bot.say(from, "You've already signed up silly!");
             } else {
                 bot.say(from, "What are you trying to pull buddy? You're not allowed to play!");
@@ -45,25 +49,15 @@ bot.addListener("message", function (from, to, message) {
 
 bot.addListener('pm', function (nick, message) {
     'use strict';
-    var tourneyindex,
-        text;
-    for (tourneyindex = 0; tourneyindex < tourneylist.length; tourneyindex++) {
-        text += tourneylist[tourneyindex];
-    }
     if (nick === "OmniMage" && message === "Dump the tourneylist") {
-        console.log(tourneylist.length, tourneyindex);
+        console.log(tourneylist.length, tourneylist);
     }
 });
 
 bot.addListener('pm', function (nick, message) {
     'use strict';
-    var blacklistindex,
-        text;
-    for (blacklistindex = 0; blacklistindex < blacklist.length; blacklistindex++) {
-        text += blacklist[blacklistindex];
-    }
     if (nick === "OmniMage" && message === "Dump the blacklist") {
-        console.log(blacklist.length, blacklistindex);
+        console.log(blacklist.length, blacklist);
     }
 });
 
@@ -73,6 +67,7 @@ bot.addListener('pm', function (nick, message) {
 //   'use strict';
 //    if (nick === "OmniMage" && message === "Stop") {
 //        console.log(tourneylist.length, tourneyindex);
+//      bot.removeListener(all);
 //    }
 //});
 
@@ -91,6 +86,18 @@ bot.addListener('pm', function (nick, message) {
 
 //to-do list: validation process (valid deck, etc; prob in another file), swiss match assignment function (yay more shitty computer rng), listener for tournament boot, better method of list dumping (Security issues mentioned by Star before he left)
 
+//use Readline to secure list functions to a prompt only (person in charge) can access
 //
-//use Readline to secure list functions
-//
+//var readline = require('readline');
+//var list = readline.createInterface({
+//  input: process.stdin,
+//  output: process.stdout
+//});
+
+//list.question('Would you like the blacklist or the tourneylist dumped?', 
+//    if (answer === "Blacklist")
+//        list.write(blacklist)
+//    if (answer === "Tourneylist")
+//        list.write(tourneylist)
+//    else list.close();
+        
