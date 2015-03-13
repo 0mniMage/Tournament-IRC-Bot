@@ -15,31 +15,27 @@ var bot = new irc.Client(config.server, config.botName, {
 //actual tournament sign-up process
 
 var tourneylist = [];
-var blacklist = []; //add bad people to this list
+var blacklist = ["Se7eN"]; //add bad people to this list
 
 bot.addListener("pm", function (nick, message) {
     "use strict";
-    if (nick === "OmniMage") {
-        blacklist[blacklist.length] = message.split(" ")[1];
+    var index = message.split(" ");
+    if (nick === "OmniMage" && index[0] === "Add") {
+        blacklist[blacklist.length] = index[1];
+        bot.say("OmniMage", "I'll be on the lookout!");
     }
 });
 //user commands to join it, lots of choices = catering to lax spelling/grammar users; checks for legality and previous sign-ups.
 
 bot.addListener("message", function (from, to, message) {
     "use strict";
-    if (message.indexOf('join tourney') > -1 
-        || message.indexOf('Join tourney') > -1 
-        || message.indexOf('Join Tourney') > -1 
-        || message.indexOf('Join tournament') > -1 
-        || message.indexOf('Join Tournament') > -1) {
-        if (blacklist.indexOf() > -1) {
-            if (tourneylist.indexOf() > -1) {
-                bot.say(from, "You've already signed up silly!");
-            } else {
-                bot.say(from, "What are you trying to pull buddy? You're not allowed to play!");
-            }
+    if (message.indexOf('join tourney') > -1 || message.indexOf('Join tourney') > -1 || message.indexOf('Join Tourney') > -1 || message.indexOf('Join tournament') > -1 || message.indexOf('Join Tournament') > -1) {
+        if (blacklist.indexOf(from) > -1) {
+            bot.say(from, "What are you trying to pull buddy? You're not allowed to play!");
+        } else if (tourneylist.indexOf(from) > -1) {
+            bot.say(from, "You've already signed up silly!");
         } else {
-            tourneylist[tourneylist.length] = message.from;
+            tourneylist[tourneylist.length] = from;
             bot.say(from, "Thanks for signing up!");
         }
     }
@@ -65,9 +61,9 @@ bot.addListener('pm', function (nick, message) {
 
 //bot.addListener('pm', function (nick, message) {
 //   'use strict';
-//    if (nick === "OmniMage" && message === "Stop") {
+//    if (nick === "OmniMage" && message === "Stop signups") {
 //        console.log(tourneylist.length, tourneyindex);
-//      bot.removeListener(all);
+//      bot.removeListener();
 //    }
 //});
 
